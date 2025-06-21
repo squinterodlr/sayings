@@ -1,0 +1,17 @@
+{
+    "name": "sayings",
+    "version": "0.1.0",
+    "description": "A simple generator of saying to flavor your NPCs.",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "serve": "npx serve .",
+        "start": "tsc --watch & npx serve ."
+    },
+    "devDependencies": {
+        "typescript": "^5.8.3"
+    },
+    "dependencies": {
+        "serve": "^14.2.4"
+    }
+}

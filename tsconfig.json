@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "ES2015",
+        "strict": true,
+        "strictNullChecks": true,
+        "sourceMap": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "rootDir": "./src",
+        "outDir": "./dist",
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist"]
+}
