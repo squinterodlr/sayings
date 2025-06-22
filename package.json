@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "description": "A simple generator of saying to flavor your NPCs.",
     "scripts": {
-        "build": "cp static/* dist/ & tsc",
+        "build": "cp -r static/* dist/ & tsc",
         "dev": "cp -r static/* dist/ && tsc --watch",
         "serve": "npx serve dist",
         "start": "cp -r static/* dist/ && tsc --watch & npx serve dist" 
