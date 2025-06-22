@@ -15,3 +15,9 @@ export function randomInt(max: number) {
 export function bernoulli(probability: number = 0.5): boolean {
     return Math.random() < probability;
 }
+
+export function randomEnumItem<T extends Record<string | number, string | number>>(enumName: T): string | number {
+    const enumKeys = Object.keys(enumName).filter( k => isNaN(Number(k)));
+    const key = enumKeys[randomInt(enumKeys.length)];
+    return enumName[key];
+}
