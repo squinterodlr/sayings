@@ -5,13 +5,13 @@ enum PluralType {
     None = ""
 }
 
-enum IndefiniteArticle {
+export enum IndefiniteArticle {
     A = "a",
     An = "an",
     None = ""
 }
 
-enum DefiniteArticle {
+export enum DefiniteArticle {
     The = "the",
     None = ""
 }
@@ -67,6 +67,25 @@ class Noun {
         }
     }
 
+    withArticle (definite: boolean = true, plural: boolean = false) : string {
+        
+        let noun: string = this.base;
+        let article: string | DefiniteArticle | IndefiniteArticle | null = this.indefiniteArticle;
+
+        if (plural) {
+            noun = this.getPluralized();
+            article = null;
+        }
+        if (definite) {
+            article = this.definiteArticle;   
+        }
+        if (article === null || article === ""){
+            return noun;
+        }
+        else {
+            return article + " " + noun;
+        }
+    }
 }
 
 
@@ -92,13 +111,18 @@ export const NOUNS: Record<string, Noun> = {
     "master": new Noun("master"),
     "pupil": new Noun("pupil"),
 
-    "life": new Noun("life", "lives"),
-    "freedom": new Noun("freedom"),
+    "life": new Noun("life", "lives", IndefiniteArticle.None, DefiniteArticle.None),
+    "freedom": new Noun("freedom", PluralType.S, IndefiniteArticle.None, DefiniteArticle.None),
     "thirst": new Noun("thirst", PluralType.None),
+    "hunger": new Noun("hunger", PluralType.None),
     "success": new Noun("success", PluralType.ES),
     "failure": new Noun("failure"),
     "win": new Noun("win"),
     "loss": new Noun("loss", PluralType.ES),
+    "love": new Noun("love", PluralType.None, IndefiniteArticle.None, DefiniteArticle.None),
+
+    "light": new Noun("light"),
+    "darkness": new Noun("darkness", PluralType.None, IndefiniteArticle.None),
 
     "science": new Noun("science"),
     "art": new Noun("art"),
@@ -109,5 +133,18 @@ export const NOUNS: Record<string, Noun> = {
     "water": new Noun("water", PluralType.S, IndefiniteArticle.None),
     "air": new Noun("air", PluralType.S, IndefiniteArticle.None),
     "earth": new Noun("earth", PluralType.None, IndefiniteArticle.None),
-    "fire": new Noun("fire")
+    "fire": new Noun("fire"),
+
+    "head": new Noun("head"),
+    "heart": new Noun("heart"),
+    "eye": new Noun("eye"),
+
+    "key": new Noun("key"),
+    "clue": new Noun("clue"),
+    "answer": new Noun("answer"),
+    "question": new Noun("question"),
+    "paradox": new Noun("paradox", PluralType.ES),
+    "contradiction": new Noun("contradiction"),
+    "truth": new Noun("truth"),
+    "lie": new Noun("lie"),
 }

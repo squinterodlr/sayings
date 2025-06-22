@@ -1,6 +1,9 @@
 import { NOUNS } from "./nouns.js"
-import { VERBS } from "./verbs.js"
-import { randomInt } from "../utils/random.js"
+import { VERBS, ConjugationForm } from "./verbs.js"
+import { randomModal } from "./modals.js";
+import { randomFrequencyAdverb } from "./adverbs.js";
+import { randomInt, bernoulli, randomEnumItem } from "../utils/random.js"
+import { capitalize } from "../utils/stringutils.js";
 
 const nounKeys = Object.keys(NOUNS);
 const verbKeys = Object.keys(VERBS)
@@ -16,11 +19,34 @@ function randomVerb() {
 export class SayingGenerator {
 
     generate(): string {
-        
-        const subject = randomNoun();
-        const object = randomNoun();
-        const verb = VERBS["be"]
-        return `${subject.indefiniteArticle} ${subject.base} ${verb.conjugate()} ${object.indefiniteArticle} ${object.base}`
-
+        return this.#generateXisY();
     }
+    #generateXisY(): string {
+        
+        const subjectNoun = randomNoun();
+        const objectNoun = randomNoun();
+        const baseVerb = VERBS["be"];
+
+        const isPlural = bernoulli();
+        const isDefinite = bernoulli();
+        const subject = subjectNoun.withArticle(isDefinite, isPlural);
+
+        let conjugationForm = isPlural? ConjugationForm.Plural : ConjugationForm.ThirdPersonSingular;
+
+        const modal = randomModal();
+        conjugationForm = modal === null ? conjugationForm : ConjugationForm.Base;
+
+        let verb = baseVerb.conjugate(conjugationForm);
+        const adverb = randomFrequencyAdverb();
+
+        if (modal === null) {
+            verb = (adverb === null) ? verb : verb + " " + adverb;
+        }
+        else {
+            verb = (adverb === null) ? modal + " " + verb : modal + " " + adverb + " " + verb;
+        }
+       
+        return `${capitalize(subject)} ${verb} ${objectNoun.indefiniteArticle} ${objectNoun.base}.`;
+    }
+
 }
