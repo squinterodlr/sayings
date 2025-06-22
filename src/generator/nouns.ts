@@ -81,8 +81,9 @@ export const NOUNS: Noun[] = [
     new Noun("girl"),
 
     new Noun("world"),
-    new Noun("heaven", PluralType.S, IndefiniteArticle.None),
-    new Noun("hell", PluralType.S, IndefiniteArticle.None),
+    new Noun("heaven", PluralType.S, IndefiniteArticle.None, DefiniteArticle.None),
+    new Noun("hell", PluralType.S, IndefiniteArticle.None, DefiniteArticle.None),
+    new Noun("home", PluralType.S, IndefiniteArticle.A, DefiniteArticle.None),
 
     new Noun("ally", "allies"),
     new Noun("enemy", "enemies"),
