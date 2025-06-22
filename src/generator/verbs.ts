@@ -91,5 +91,6 @@ export const VERBS : Record<string, Verb>  = {
     "listen": new Verb("listen"),
     "touch": new Verb("touch", ThirdPersonSingularForm.Es),
     "save": new Verb("save"),
-    "hold": new Verb("hold")  
+    "hold": new Verb("hold"),
+    "walk": new Verb("walk"),
 };
