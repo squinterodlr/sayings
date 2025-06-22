@@ -15,7 +15,7 @@ enum PluralVerbForm {
     Defective
 }
 
-enum conjugationForm {
+export enum ConjugationForm {
     Base,
     Infinitive,
     FirstPersonSingular,
@@ -48,19 +48,19 @@ class Verb {
 
     }
 
-    conjugate(form:conjugationForm = conjugationForm.ThirdPersonSingular): string {
+    conjugate(form:ConjugationForm = ConjugationForm.ThirdPersonSingular): string {
 
         switch (form) {
-            case conjugationForm.Base:
+            case ConjugationForm.Base:
                 return this.base;
                         
-            case conjugationForm.Infinitive:
+            case ConjugationForm.Infinitive:
                 return "to " + this.base;
             
-            case conjugationForm.FirstPersonSingular:
+            case ConjugationForm.FirstPersonSingular:
                 return this.defectiveFirstPersonSingular ? this.firstPersonSingular as string : this.base;
 
-            case conjugationForm.ThirdPersonSingular:
+            case ConjugationForm.ThirdPersonSingular:
                 if (this.defectiveThirdPersonSingular) {
                     return this.thirdPersonSingular;
                 }
@@ -71,7 +71,7 @@ class Verb {
                     return this.base + this.thirdPersonSingular as string;
                 }
 
-            case conjugationForm.Plural :
+            case ConjugationForm.Plural :
                 return this.defectivePlural? this.plural as string : this.base;
         }
 
