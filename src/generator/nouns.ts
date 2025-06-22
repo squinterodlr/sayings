@@ -5,9 +5,14 @@ enum PluralType {
     None = ""
 }
 
-enum ArticleType {
+enum IndefiniteArticle {
     A = "a",
     An = "an",
+    None = ""
+}
+
+enum DefiniteArticle {
+    The = "the",
     None = ""
 }
 
@@ -17,26 +22,30 @@ enum ArticleType {
 class Noun {
     base: string;
     plural: PluralType | string;
-    article: ArticleType;
+    indefiniteArticle: IndefiniteArticle;
+    definiteArticle: DefiniteArticle;
     constructor (
         base: string,
         plural: PluralType | string = PluralType.S,
-        article?: ArticleType,
+        indefiniteArticle?: IndefiniteArticle,
+        definiteArticle: DefiniteArticle = DefiniteArticle.The,
     ) {
 
         this.base = base;
         this.plural = plural;
-        if (!article) {
+        this.definiteArticle = definiteArticle;
+
+        if (!indefiniteArticle) {
 
             if (["a", "e", "i", "o", "u"].includes(base[0])) {
-                this.article = ArticleType.An;
+                this.indefiniteArticle = IndefiniteArticle.An;
             }
             else {
-                this.article = ArticleType.A;
+                this.indefiniteArticle = IndefiniteArticle.A;
             }
         }
         else {
-            this.article = article;
+            this.indefiniteArticle = indefiniteArticle;
         }
     }
 
@@ -72,8 +81,8 @@ export const NOUNS: Noun[] = [
     new Noun("girl"),
 
     new Noun("world"),
-    new Noun("heaven"),
-    new Noun("hell"),
+    new Noun("heaven", PluralType.S, IndefiniteArticle.None),
+    new Noun("hell", PluralType.S, IndefiniteArticle.None),
 
     new Noun("ally", "allies"),
     new Noun("enemy", "enemies"),
@@ -91,9 +100,9 @@ export const NOUNS: Noun[] = [
 
     new Noun("science"),
     new Noun("art"),
-    new Noun("mathematics", PluralType.None, ArticleType.None),
+    new Noun("mathematics", PluralType.None, IndefiniteArticle.None),
     new Noun("philosophy", "philosophies"),
-    new Noun("progress", PluralType.None, ArticleType.None),
+    new Noun("progress", PluralType.None, IndefiniteArticle.None),
 
 
 ]
