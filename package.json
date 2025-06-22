@@ -3,10 +3,10 @@
     "version": "0.1.0",
     "description": "A simple generator of saying to flavor your NPCs.",
     "scripts": {
-        "build": "tsc",
-        "dev": "tsc --watch",
-        "serve": "npx serve .",
-        "start": "tsc --watch & npx serve ."
+        "build": "cp static/* dist/ & tsc",
+        "dev": "cp -r static/* dist/ && tsc --watch",
+        "serve": "npx serve dist",
+        "start": "cp -r static/* dist/ && tsc --watch & npx serve dist" 
     },
     "devDependencies": {
         "typescript": "^5.8.3"
