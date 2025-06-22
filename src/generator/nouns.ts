@@ -35,7 +35,7 @@ class Noun {
         this.plural = plural;
         this.definiteArticle = definiteArticle;
 
-        if (!indefiniteArticle) {
+        if (indefiniteArticle === undefined) {
 
             if (["a", "e", "i", "o", "u"].includes(base[0])) {
                 this.indefiniteArticle = IndefiniteArticle.An;
@@ -70,40 +70,44 @@ class Noun {
 }
 
 
-export const NOUNS: Noun[] = [
+export const NOUNS: Record<string, Noun> = {
     
-    new Noun("man", "men"),
-    new Noun("woman", "women"),
-    new Noun("person", "people"),
-    new Noun("human"),
-    new Noun("child", "children"),
-    new Noun("boy"),
-    new Noun("girl"),
+    "man": new Noun("man", "men"),
+    "woman": new Noun("woman", "women"),
+    "person": new Noun("person", "people"),
+    "human": new Noun("human"),
+    "child": new Noun("child", "children"),
+    "boy": new Noun("boy"),
+    "girl": new Noun("girl"),
 
-    new Noun("world"),
-    new Noun("heaven", PluralType.S, IndefiniteArticle.None, DefiniteArticle.None),
-    new Noun("hell", PluralType.S, IndefiniteArticle.None, DefiniteArticle.None),
-    new Noun("home", PluralType.S, IndefiniteArticle.A, DefiniteArticle.None),
+    "world": new Noun("world"),
+    "heaven": new Noun("heaven", PluralType.S, IndefiniteArticle.None, DefiniteArticle.None),
+    "hell": new Noun("hell", PluralType.S, IndefiniteArticle.None, DefiniteArticle.None),
+    "home": new Noun("home", PluralType.S, IndefiniteArticle.A, DefiniteArticle.None),
+    "prison": new Noun("prison"),
 
-    new Noun("ally", "allies"),
-    new Noun("enemy", "enemies"),
+    "ally": new Noun("ally", "allies"),
+    "enemy": new Noun("enemy", "enemies"),
 
-    new Noun("master"),
-    new Noun("pupil"),
+    "master": new Noun("master"),
+    "pupil": new Noun("pupil"),
 
-    new Noun("life", "lives"),
-    new Noun("freedom"),
-    new Noun("thirst", PluralType.None),
-    new Noun("success", PluralType.ES),
-    new Noun("failure"),
-    new Noun("win"),
-    new Noun("loss", PluralType.ES),
+    "life": new Noun("life", "lives"),
+    "freedom": new Noun("freedom"),
+    "thirst": new Noun("thirst", PluralType.None),
+    "success": new Noun("success", PluralType.ES),
+    "failure": new Noun("failure"),
+    "win": new Noun("win"),
+    "loss": new Noun("loss", PluralType.ES),
 
-    new Noun("science"),
-    new Noun("art"),
-    new Noun("mathematics", PluralType.None, IndefiniteArticle.None),
-    new Noun("philosophy", "philosophies"),
-    new Noun("progress", PluralType.None, IndefiniteArticle.None),
+    "science": new Noun("science"),
+    "art": new Noun("art"),
+    "mathematics": new Noun("mathematics", PluralType.None, IndefiniteArticle.None),
+    "philosophy": new Noun("philosophy", "philosophies"),
+    "progress": new Noun("progress", PluralType.None, IndefiniteArticle.None),
 
-
-]
+    "water": new Noun("water", PluralType.S, IndefiniteArticle.None),
+    "air": new Noun("air", PluralType.S, IndefiniteArticle.None),
+    "earth": new Noun("earth", PluralType.None, IndefiniteArticle.None),
+    "fire": new Noun("fire")
+}
