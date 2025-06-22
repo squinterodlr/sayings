@@ -1,11 +1,13 @@
+import { NOUNS } from "./nouns.js"
+import { randomInt } from "../utils/random.js"
 export class SayingGenerator {
 
     generate(): string {
-        const coinFlip = Math.random()
-        if (coinFlip < 0.5) {
-            return "A man must not be a fish."
-        } else {
-            return "Sometimes one is fast."
-        }
+        
+        const subject = NOUNS[randomInt(NOUNS.length)]
+        const object = NOUNS[randomInt(NOUNS.length)]
+
+        return `${subject.article} ${subject.base}`
+
     }
 }
