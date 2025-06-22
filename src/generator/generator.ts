@@ -17,7 +17,7 @@ export class SayingGenerator {
 
     generate(): string {
         
-        const subject = NOUNS["mathematics"];
+        const subject = randomNoun();
         const object = randomNoun();
         const verb = VERBS["be"]
         return `${subject.indefiniteArticle} ${subject.base} ${verb.conjugate()} ${object.indefiniteArticle} ${object.base}`
