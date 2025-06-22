@@ -1,3 +1,5 @@
+import { Quantifier } from "./quantifiers.js";
+
 enum PluralType {
     Same = "same",
     S = "s",
@@ -86,6 +88,12 @@ class Noun {
             return article + " " + noun;
         }
     }
+
+    withQuantifier(quantifier: Quantifier) : string {
+        const noun = quantifier.needsPlural ? this.getPluralized() : this.base;
+        return quantifier.name + " " + noun;
+    }
+
 }
 
 

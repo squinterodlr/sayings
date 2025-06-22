@@ -1,4 +1,5 @@
 import { NOUNS } from "./nouns.js"
+import { randomQuantifier } from "./quantifiers.js";
 import { VERBS, ConjugationForm } from "./verbs.js"
 import { randomModal } from "./modals.js";
 import { randomFrequencyAdverb } from "./adverbs.js";
@@ -27,10 +28,20 @@ export class SayingGenerator {
         const objectNoun = randomNoun();
         const baseVerb = VERBS["be"];
 
-        const isPlural = bernoulli();
         const isDefinite = bernoulli();
-        const subject = subjectNoun.withArticle(isDefinite, isPlural);
+        let isPlural: boolean;
 
+        let subject: string;
+        const quantifier = isDefinite? null : randomQuantifier();
+        if (quantifier === null) {
+            isPlural = bernoulli();
+            subject = subjectNoun.withArticle(isDefinite, isPlural);
+        }
+        else {
+            isPlural = quantifier.needsPlural;
+            subject = subjectNoun.withQuantifier(quantifier);
+        }
+        
         let conjugationForm = isPlural? ConjugationForm.Plural : ConjugationForm.ThirdPersonSingular;
 
         const modal = randomModal();
@@ -49,4 +60,5 @@ export class SayingGenerator {
         return `${capitalize(subject)} ${verb} ${objectNoun.indefiniteArticle} ${objectNoun.base}.`;
     }
 
+    
 }
