@@ -7,7 +7,7 @@ export class SayingGenerator {
         const subject = NOUNS[randomInt(NOUNS.length)]
         const object = NOUNS[randomInt(NOUNS.length)]
 
-        return `${subject.article} ${subject.base}`
+        return `${subject.indefiniteArticle} ${subject.base}`
 
     }
 }
