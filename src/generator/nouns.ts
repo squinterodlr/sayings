@@ -1,6 +1,6 @@
 import { Quantifier } from "./quantifiers.js";
 
-enum PluralType {
+export enum PluralType {
     Same = "same",
     S = "s",
     ES = "es",
@@ -113,19 +113,26 @@ export const NOUNS: Record<string, Noun> = {
     "home": new Noun("home", PluralType.S, IndefiniteArticle.A, DefiniteArticle.None),
     "prison": new Noun("prison"),
 
+    "sun": new Noun("sun", PluralType.None, IndefiniteArticle.A, DefiniteArticle.The),
+    "moon": new Noun("moon", PluralType.None, IndefiniteArticle.A, DefiniteArticle.The),
+    
     "ally": new Noun("ally", "allies"),
     "enemy": new Noun("enemy", "enemies"),
+    "friend": new Noun("friend"),
+    "stranger": new Noun("stranger"),
+    "family": new Noun("family", "families"),
 
     "master": new Noun("master"),
     "pupil": new Noun("pupil"),
 
     "life": new Noun("life", "lives", IndefiniteArticle.None, DefiniteArticle.None),
+    "death": new Noun("death", PluralType.None, IndefiniteArticle.A, DefiniteArticle.None),
     "freedom": new Noun("freedom", PluralType.S, IndefiniteArticle.None, DefiniteArticle.None),
     "thirst": new Noun("thirst", PluralType.None),
     "hunger": new Noun("hunger", PluralType.None),
-    "success": new Noun("success", PluralType.ES),
+    "success": new Noun("success", PluralType.ES, IndefiniteArticle.None, DefiniteArticle.None),
     "failure": new Noun("failure"),
-    "win": new Noun("win"),
+    "win": new Noun("win", PluralType.None, IndefiniteArticle.A, DefiniteArticle.The),
     "loss": new Noun("loss", PluralType.ES),
     "love": new Noun("love", PluralType.None, IndefiniteArticle.None, DefiniteArticle.None),
 
@@ -134,9 +141,11 @@ export const NOUNS: Record<string, Noun> = {
 
     "science": new Noun("science"),
     "art": new Noun("art"),
+    "magic": new Noun("magic", PluralType.None, IndefiniteArticle.None, DefiniteArticle.None),
     "mathematics": new Noun("mathematics", PluralType.None, IndefiniteArticle.None),
     "philosophy": new Noun("philosophy", "philosophies"),
     "progress": new Noun("progress", PluralType.None, IndefiniteArticle.None),
+    "curse": new Noun("curse"),
 
     "water": new Noun("water", PluralType.S, IndefiniteArticle.None),
     "air": new Noun("air", PluralType.S, IndefiniteArticle.None),
@@ -146,6 +155,10 @@ export const NOUNS: Record<string, Noun> = {
     "head": new Noun("head"),
     "heart": new Noun("heart"),
     "eye": new Noun("eye"),
+    "spirit": new Noun("spirit"),
+    "soul": new Noun("soul"),
+    "blood": new Noun("blood", PluralType.None, IndefiniteArticle.None, DefiniteArticle.The),
+    "mind": new Noun("mind"),
 
     "key": new Noun("key"),
     "clue": new Noun("clue"),

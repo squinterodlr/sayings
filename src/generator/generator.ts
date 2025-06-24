@@ -1,4 +1,4 @@
-import { NOUNS } from "./nouns.js"
+import { IndefiniteArticle, NOUNS, PluralType } from "./nouns.js"
 import { randomQuantifier } from "./quantifiers.js";
 import { VERBS, ConjugationForm } from "./verbs.js"
 import { randomModal } from "./modals.js";
@@ -20,7 +20,16 @@ function randomVerb() {
 export class SayingGenerator {
 
     generate(): string {
-        return this.#generateXisY();
+
+        if (bernoulli()) {
+            return this.#generateXisY();
+        }
+        else if (bernoulli(0.25)){
+            return this.#generateXisYisZ();
+        }
+        else {
+            return this.#generateHowCanXbeYWhenZisW();
+        }
     }
     #generateXisY(): string {
         
@@ -28,7 +37,7 @@ export class SayingGenerator {
         const objectNoun = randomNoun();
         const baseVerb = VERBS["be"];
 
-        const isDefinite = bernoulli();
+        const isDefinite = (subjectNoun.indefiniteArticle === IndefiniteArticle.None) ? false : bernoulli();
         let isPlural: boolean;
 
         let subject: string;
@@ -42,6 +51,8 @@ export class SayingGenerator {
             subject = subjectNoun.withQuantifier(quantifier);
         }
         
+        isPlural = isPlural && (subjectNoun.plural !== PluralType.None);
+
         let conjugationForm = isPlural? ConjugationForm.Plural : ConjugationForm.ThirdPersonSingular;
 
         const modal = randomModal();
@@ -60,5 +71,27 @@ export class SayingGenerator {
         return `${capitalize(subject)} ${verb} ${objectNoun.indefiniteArticle} ${objectNoun.base}.`;
     }
 
+    #generateXisYisZ() : string {
+        const firstNoun = randomNoun().withArticle(false, false);
+        const secondNoun = randomNoun().withArticle(false, false);
+        const thirdNoun = randomNoun().withArticle(false, false);
+
+        return `${capitalize(firstNoun)} is ${secondNoun} is ${thirdNoun}.`
+    }
     
+    #generateHowCanXbeYWhenZisW() : string {
+
+        const isPlural = bernoulli(0.25);
+        const firstNoun = randomNoun().withArticle(false, isPlural);
+        const secondNoun = randomNoun().withArticle(false, isPlural);
+        const thirdNoun = randomNoun().withArticle(false, isPlural);
+        const fourthNoun = randomNoun().withArticle(false, isPlural);
+
+        const verb = isPlural ? "are" : "is";
+        const modal = randomModal(0);
+        const question = ["how", "when", "why"][randomInt(3)];
+        const connector = ["when", "since", "if", "even though"][randomInt(4)];
+
+        return `${capitalize(question)} ${modal} ${firstNoun} be ${secondNoun} ${connector} ${thirdNoun} ${verb} ${fourthNoun}?`;
+    }
 }
